@@ -1,0 +1,138 @@
+<comment>
+problem = Simple test of gravitational collapse, star particle creation, radiative feedback (RADIATION & STAR_PARTICLE)
+author  = A. Skinner
+journal = unpublished
+
+<log>
+file_open       = 0                 # write to .out file?  otherwise, writes to stdout
+out_level       = 1                 # sets output level (default=0)
+
+<job>
+problem_id      = RadParGrav        # problem ID: basename of output filenames
+maxout          = 1                 # Output blocks number from 1 -> maxout
+num_domains     = 1                 # number of Domains in Mesh
+
+<output1>
+out_fmt         = hst               # History data dump
+dt              = 1.76e-3      # time increment between outputs
+
+<output2>
+out_fmt         = vtk               # VTK data dump
+dt              = 1.76              # time increment between outputs
+
+<output3>
+out_fmt         = starpar_vtk
+dt              = 1.76
+
+<output4>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = d
+id              = d1
+x1              = 0.0
+
+<output5>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = d
+id              = d2
+x2              = 0.0
+
+<output6>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = d
+id              = d3
+x3              = 0.0
+usr_expr_flag   = 0
+
+<output7>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = Sigma1
+id              = Sigma1
+x1              = -29.0:29.0
+usr_expr_flag   = 1
+
+<output8>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = Sigma2
+id              = Sigma2
+x2              = -29.0:29.0
+usr_expr_flag   = 1
+
+<output9>
+out_fmt         = vtk
+dt              = 1.76e-1
+out             = Sigma3
+id              = Sigma3
+x3              = -29.0:29.0
+usr_expr_flag   = 1
+
+<output10>
+out_fmt         = rst               # Restart dump
+dt              = 1.76e1      # time increment between outputs
+
+<time>
+cour_no         = 0.4               # The Courant, Friedrichs, & Lewy (CFL) Number
+nlim            = 1000000           # cycle limit
+tlim            = 1.76e1        # time limit
+
+<domain1>
+level           = 0                 # refinement level this Domain (root=0)
+Nx1             = 128               # Number of zones in R-direction
+x1min           = -30.0             # minimum value of R
+x1max           = 30.0              # maximum value of R
+bc_ix1          = 2                 # inner (R) boundary flag
+bc_ox1          = 2                 # outer (R) boundary flag
+
+Nx2             = 128               # Number of zones in PHI-direction
+x2min           = -30.0             # minimum value of PHI
+x2max           = 30.0              # maximum value of PHI (=pi/4)
+bc_ix2          = 2                 # inner (PHI) boundary flag
+bc_ox2          = 2                 # outer (PHI) boundary flag
+
+Nx3             = 128               # Number of zones in Z-direction
+x3min           = -30.0             # minimum value of Z
+x3max           = 30.0              # maximum value of Z
+bc_ix3          = 2
+bc_ox3          = 2
+
+NGrid_x1        = 4
+NGrid_x2        = 4
+NGrid_x3        = 4
+
+<problem>
+gamma           = 1.66666666666667  # gamma = C_p/C_v
+crad            = 250.0            # reduced speed of light
+rho_small       = 1.0e-3              # background density floor
+rho_ffac        = 1.0e-1              # fraction below floor to zero
+rho_fdt         = 1.76e-2             # time between density outputs
+surfd_out       = 0             # flag to indicate whether to output SDs
+fluxrad_out     = 0             # Number of radii to output fluxes at
+theta = 1.0
+rho_crit = 10000.0
+#nradsrc = 8
+rsrc = 1.0
+
+iso_csound       = 0.2               # isothermal sound speed [km s^-1]
+M_GMC            = 5.0e4             # GMC mass [Msun]
+rcloud           = 15.0              # cloud radius [pc]
+Psi              = 2000.0            # luminosity per mass [erg s^-1 g^-1]
+kappa_IR         = 1000.0              # IR absorption opacity [cm^2 g^-1]
+rseed            = -1                # seed for random number generator
+alpha_vir        = 2.0               # scale dv such that Ekin = 0.5*alpha_vir*Egrav
+beta             = 0.02              # isothermal pressure/magnetic pressure (MHD only)
+dedt             = 1000.0            # energy injection rate
+dtdrive          = 0.001             # interval for generating new driving spectrum
+expo             = 3.0               # exponent of power-law spectrum (ispect=1)
+kpeak            = 8.0               # G&O spectral peak (ispect=2)
+klow             = 2.0               # multiple of 2*pi/L for cut-off at low  wavenumbers
+khigh            = 64.0              # multiple of 2*pi/L for cut-off at high wavenumbers
+                                     # (NB: Must be no larger than 1/2 the minimum resolution)
+ispect           = 1                 # spectrum type:  ispect=1, decreasing power-law (original form)
+                                     #                       =2, form from Gammie & Ostriker
+idrive           = 1                 # driving type:   idrive=0, driven turbulence
+                                     #                       =1, decaying turbulence 
+

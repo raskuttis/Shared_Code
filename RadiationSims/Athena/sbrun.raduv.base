@@ -1,0 +1,37 @@
+#! /bin/csh
+#SBATCH -N 4 
+#SBATCH --ntasks-per-node=16 
+#SBATCH -t 07:55:00
+# sends mail when process begins, and
+# when it ends. Make sure you define your email
+# address.
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
+#SBATCH --mail-user=raskutti@princeton.edu
+
+set basedir=/home/raskutti/Hyperion/Hyperion-radmagnetic
+set fileext=UV_M5.0e4_R15.0_N128_Tf4
+set fileextout=UV_M5.0e4_R15.0_N128_Tf4_B0.05_SDs
+set bindir=$basedir/bin
+set newbindir=$bindir/$fileextout
+set inputdir=$basedir/tst/new/RadParGrav/$fileext
+set outputbasedir=/scratch/gpfs/raskutti/RadUVCloud
+set outputdir=$outputbasedir/$fileextout
+set logfile=1
+
+module load openmpi
+module load fftw
+
+if (! -d $outputdir) then
+  mkdir $outputdir
+endif
+rm -rf $outputdir/*
+if (! -d $newbindir) then
+  mkdir $newbindir
+endif
+rm -rf $newbindir/*
+
+cp $bindir/athena $newbindir/athena
+cd $newbindir
+
+srun -n 64 ./athena -i $inputdir/athinput.raduvcloud log/file_open=$logfile -d job/problem_id=RadParGrav time/nlim=100000 time/tlim=1.76e1 output1/dt=1.76e-3 domain1/NGrid_x1=4 domain1/NGrid_x2=4 domain1/NGrid_x3=4 domain1/Nx1=128 domain1/Nx2=128 domain1/Nx3=128 domain1/x1min=-30.0 domain1/x1max=30.0 domain1/x2min=-30.0 domain1/x2max=30.0 domain1/x3min=-30.0 domain1/x3max=30.0 problem/beta=0.05 problem/rseed=-1 problem/rsrc=1.0 problem/Psi=0.0 problem/rho_small=1.0e-3 problem/rho_ffac=1.0e-1 problem/rho_fdt=1.76e-2 problem/surfd_out=1 problem/fluxrad_out=0 problem/M_GMC=5.0e4 problem/rcloud=15.0 problem/alpha_vir=2.0 -d $outputdir

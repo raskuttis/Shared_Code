@@ -1,19 +1,20 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_hst import *
-from hyp_out import *
-from hyp_pdf import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_hst import *
+from ..Hyperion.hyp_out import *
+from ..Hyperion.hyp_pdf import *
+from ..Hyperion.hyp_models import *
 import matplotlib.pyplot as plt
-from hyp_math import *
+from ..Hyperion.hyp_math import *
 from scipy.interpolate import interp1d
 from scipy.special import erf
 from scipy.stats import lognorm
 
-plotdir = '/Users/sudhirraskutti/Desktop/Thesis/Dissertation_3/Figures/'
-datadir = '/scratch/gpfs/raskutti/RadParGrav/'
-hstfile = 'id0/RadParGrav.hst'
-outfile = 'RadParGrav.out'
-hostname = 'raskutti@tiger.princeton.edu'
+## Plot showing velocity distributions
+
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
+hostname, datadir, hstfile, outfile, plotdir = init_dirs('tiger')
+fname = 'ft6-10d.pdf'
 
 datafolder = 'UV_M5.0e4_R15.0_N256_Tf4_Alt_SDs/'
 print 'Reading Out and Hst'
@@ -107,7 +108,7 @@ print 'Reading Out and Hst'
 outlines = read_outfile(hostname,datadir + datafolder + outfile)
 hstdata = read_hstfile(hostname,datadir + datafolder + hstfile)
 
-tlist = [1.1,1.88,2.45,3.19]
+tlist = [0.1,0.5,0.9,0.5]
 ttypelist = [1,1,1,0]
 nts = len(tlist)
 
@@ -162,7 +163,6 @@ for i in xrange(0,nts):
         tmini = np.abs(mstar - tlist[i] * eff).argmin()
     else:
         tmini = np.abs(mof - tlist[i] * (1.0 - eff)).argmin()
-    tmini = np.abs(time - tlist[i]).argmin()
     tmin = time[tmini]
     efft = mstar[tmini]
     tmineff = tbreak + (efft - epsbreak) / epsff
@@ -191,13 +191,15 @@ for i in xrange(0,nts):
 ysize = 0.25 * 11.69
 xsize = 0.4 * 8.27
 fontsize = '10'
-plt.figure(figsize = [2*xsize,ysize])
+plt.figure(figsize = [xsize,ysize])
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif', size=fontsize)
 
-plt.subplot(1,2,1)
+plt.subplot(1,1,1)
+plt.subplots_adjust(left=0.2)
 plt.subplots_adjust(bottom=0.2)
-t1, t2, t3, t4 = plt.plot(plotvs[0],plotpdfs[0],'k',plotvs[1],plotpdfs[1],'r',plotvs[2],plotpdfs[2],'b',plotvs[3],plotpdfs[3],'g')
+plt.plot(plotvrs[0],plotpdfrs[0],'k',plotvrs[1],plotpdfrs[1],'r',plotvrs[2],plotpdfrs[2],'b',plotvrs[3],plotpdfrs[3],'g')
+t1, t2, t3, t4 = plt.plot(plotvs[0],plotpdfs[0],'--k',plotvs[1],plotpdfs[1],'--r',plotvs[2],plotpdfs[2],'--b',plotvs[3],plotpdfs[3],'--g')
 plt.legend((t1,t2,t3,t4), (r"$\displaystyle t_{\rm 10}$",r"$\displaystyle t_{\rm 50}$",r"$\displaystyle t_{\rm 90}$",r"$\displaystyle t_{\rm of, 50}$"),prop={'size':8})
 #plt.xscale('log')
 plt.yscale('log')
@@ -207,16 +209,7 @@ plt.xticks([0.0,25.0,50.0])
 plt.xlabel(r"$\displaystyle \mid v \mid / [{\rm km~s^{-1}}]$")
 plt.ylabel(r"$\displaystyle P_M$")
 
-plt.subplot(1,2,2)
-plt.plot(plotvrs[0],plotpdfrs[0],'k',plotvrs[1],plotpdfrs[1],'r',plotvrs[2],plotpdfrs[2],'b',plotvrs[3],plotpdfrs[3],'g')
-plt.yscale('log')
-plt.text(0.05*20,10**(0.9*5-6),r"$\displaystyle(b)$")
-plt.axis([0.0,50.0,1.0e-6,1.0e-1])
-plt.xticks([0.0,25.0,50.0])
-plt.yticks([])
-plt.xlabel(r"$\displaystyle \mid v \mid / [{\rm km~s^{-1}}]$")
-
-pp = PdfPages(plotdir + 'ft6-10d.pdf')
+pp = PdfPages(plotdir + fname)
 pp.savefig()
 pp.close()
 

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 ## Plot showing evolution of fits to the density PDF
 
-## Define the locations where data is located and where to plot from hyp_models
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
 hostname, datadir, hstfile, outfile, plotdir = init_dirs('ast')
 pdffile = 'denpdfall.dat'
 fname = 'ft3-20.pdf'

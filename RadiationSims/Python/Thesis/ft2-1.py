@@ -6,7 +6,7 @@ from ..Hyperion.hyp_models import *
 import matplotlib.pyplot as plt
 import numpy as np
 
-## Define the locations where data is located and where to plot from hyp_models
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
 hostname, datadir, hstfile, outfile, plotdir = init_dirs('ast')
 fname = 'ft2-1.pdf'
 

@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 ## Plot showing evolution of best-fit lognormal width and x as a function of magnetic field strength
 
-## Define the locations where data is located and where to plot from hyp_models
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
 hostname, datadir, hstfile, outfile, plotdir = init_dirs('tiger')
 fname = 'ft6-8d.pdf'
 pdffile = 'sdmasspdfmeancirc.dat'

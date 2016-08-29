@@ -1,5 +1,5 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_math import *
+from ..Hyperion.hyp_math import *
 import numpy as np
 import matplotlib.pyplot as plt
 

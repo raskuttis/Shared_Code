@@ -1,6 +1,6 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_fil import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_fil import *
 from scipy.interpolate import RegularGridInterpolator as rgi
 import matplotlib.pyplot as plt
 

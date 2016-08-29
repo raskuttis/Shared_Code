@@ -1,20 +1,20 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_hst import *
-from hyp_out import *
-from hyp_pdf import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_hst import *
+from ..Hyperion.hyp_out import *
+from ..Hyperion.hyp_pdf import *
+from ..Hyperion.hyp_models import *
 import matplotlib.pyplot as plt
-from hyp_math import *
+from ..Hyperion.hyp_math import *
+from scipy.interpolate import interp1d
 from scipy.special import erf
+from scipy.stats import lognorm
 
+## Plot showing velocity distributions
 
-plotdir = '/Users/sudhirraskutti/Desktop/Thesis/Dissertation_3/Figures/'
-datadir = '/scratch/gpfs/raskutti/RadParGrav/'
-#datadir = '/u/raskutti/PhD/Hyperion/Tests/RadParGrav/'
-hstfile = 'id0/RadParGrav.hst'
-outfile = 'RadParGrav.out'
-hostname = 'raskutti@tiger.princeton.edu'
-#hostname = 'raskutti@raleigh.astro.princeton.edu'
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
+hostname, datadir, hstfile, outfile, plotdir = init_dirs('tiger')
+fname = 'ft6-10e.pdf'
 
 datafolder = 'UV_M5.0e4_R15.0_N256_Tf4_Alt_SDs/'
 print 'Reading Out and Hst'
@@ -174,7 +174,7 @@ plt.ylabel(r"$\displaystyle v_r / [{\rm km~s^{-1}}]$")
 plt.xlabel(r"$\displaystyle \Sigma^c / [M_{\odot}~{\rm pc^{-2}}]$")
 plt.yticks([0.0,10.0,20.0])
 
-pp = PdfPages(plotdir + 'ft6-10e.pdf')
+pp = PdfPages(plotdir + fname)
 pp.savefig()
 pp.close()
 

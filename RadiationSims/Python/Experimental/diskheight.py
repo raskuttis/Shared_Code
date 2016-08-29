@@ -1,9 +1,9 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_fil import *
-from hyp_out import *
-from hyp_hst import *
-from hyp_star import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_fil import *
+from ..Hyperion.hyp_out import *
+from ..Hyperion.hyp_hst import *
+from ..Hyperion.hyp_star import *
 from scipy.interpolate import RegularGridInterpolator as rgi
 from astropy.io import fits
 import matplotlib.pyplot as plt

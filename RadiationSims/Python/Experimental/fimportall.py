@@ -1,5 +1,5 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
+from ..Hyperion.hyp_read import *
 import matplotlib.pyplot as plt
 
 plotdir = '/Users/sudhirraskutti/Desktop/Thesis/PaperII/Figures/'

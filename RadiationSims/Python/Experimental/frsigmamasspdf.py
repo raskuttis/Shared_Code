@@ -1,10 +1,10 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_hst import *
-from hyp_out import *
-from hyp_pdf import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_hst import *
+from ..Hyperion.hyp_out import *
+from ..Hyperion.hyp_pdf import *
 import matplotlib.pyplot as plt
-from hyp_math import *
+from ..Hyperion.hyp_math import *
 
 plotdir = '/Users/sudhirraskutti/Desktop/Thesis/PaperII/Figures/'
 datadir = '/u/raskutti/PhD/Hyperion/Tests/RadParGrav/'

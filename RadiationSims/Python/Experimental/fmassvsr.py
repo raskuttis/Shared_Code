@@ -1,7 +1,7 @@
 from matplotlib.backends.backend_pdf import PdfPages
-from hyp_read import *
-from hyp_out import *
-from hyp_fluxes import *
+from ..Hyperion.hyp_read import *
+from ..Hyperion.hyp_out import *
+from ..Hyperion.hyp_fluxes import *
 import matplotlib.pyplot as plt
 
 plotdir = '/Users/sudhirraskutti/Desktop/Thesis/PaperII/Figures/'

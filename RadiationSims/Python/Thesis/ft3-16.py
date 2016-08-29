@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 ## Plot showing evolution of stellar mass and virial parameter as a function of resolution for high SD model
 
-## Define the locations where data is located and where to plot from hyp_models
+## Define the locations where data is located and where to plot from ..Hyperion.hyp_models
 hostname, datadir, hstfile, outfile, plotdir = init_dirs('ast')
 fname = 'ft3-16.pdf'
 

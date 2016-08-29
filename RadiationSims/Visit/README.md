@@ -1,7 +1,12 @@
 Package containing all the Python code used to plot density slices and surface density projections from the vtk dumps output from Hyperion simulations. To plot the vtk slices take the following steps
 
-    1)  If the simulation has run on a number of clusters, the vtk files must first be joined. 
-    ** Stuff about join here **
+    1)  If the simulation has run on a number of clusters, the vtk files must first be joined. This can be done using the files in Join_VTK.
+        a) First change the homedir in join_vtk.sh to the directory in which all vtk files are stored (without the id# used for multiple clusters)
+        b) Then run ./join_vtk.sh -i RadUVCloud -o RadUVCloud_joined -v Sigma1 -c 0:5:100
+            -i is the basename for the input VTK
+            -o is the basename for the output VTK
+            -v is the extension on top of the basename e.g. Sigma1 for projections in the x-y plane
+            -c iterates over the output id numbers e.g. 0:5:1000 will do RadUVCloud.0000.vtk, RadUVCloud.0005.vtk, ..,  RadUVCloud.0100.vtk
 
     2)  The vtk files must then be stored locally wherever Visit is being run
 
